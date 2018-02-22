@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  lang  = "es">
+	<head>
+		<meta charset = "utf-8"/>
+		<title>poda 1</title>
+		<script>
+			var song = document.getElementById("sondio");
+			function parar()
+			{
+				sonido.pause();
+			}
+			function iniciar()
+			{
+				sonido.play();//Hacer referencia a la misma etiqueta
+				setTimeout(parar,14500);
+			}
+			window.onload = iniciar;
+		</script>
+		<style>
+			body{background-image: url("css/imagenes/vecindad.png");background-repeat: no-repeat;background-size:1024px 768px;/*background: -webkit-radial-gradient(center, #FFCC99, #FF9966); height: 724px;*/; max-width: 1024px; max-height: 768px;}
+		#textoabajo{color:#601F0B; text-align:center;font-size:300%;margin-top:550px; height: 20px;}
+	#boton{margin-left:960px; margin-top: 1px;}
+		
+		</style>
+	</head>
+	<body>
+		<p id = "textoabajo">LOS NOMBRES SON IMPORTANTES I</p>
+		<a href = "pag2.html"><img id = "boton" src = "css/imagenes/btn_avanzar.png"/></a>
+		<audio id = "sonido">
+			<source src = "sonidos/instructor.mp3" type = "audio/mp3"/>
+			<source src = "sonidos/instructor.ogg" type = "audio/ogg"/>
+		</audio>
+	</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html  lang  = "es">
+	<head>
+		<meta charset = "utf-8"/>
+		<link rel = "stylesheet" href = "css/estilo.css"/>
+		<title>poda 1</title>
+		<script>
+		//18/11->6:50 am a 8:44 am se hizo el prototipo de la actividad.
+		//19/11->2:00 pm a 4:00 pm se sigui desarrollando la actividad
+		//20/11->6:00 pm a 7:34 pm se termino la actividad
+		//../index.html
+			var imageActual,sonido1,sonido2;
+			function ordenarImagenes()
+			{
+				var PositionX = 50, PositionY = 100;
+				for(var x = 0; x < document.getElementsByTagName("img").length - 5; x++)
+				{
+					document.getElementsByTagName("img")[x].style.position = "absolute";
+					document.getElementsByTagName("img")[x].style.top = PositionY+"px";
+					document.getElementsByTagName("img")[x].style.left = PositionX+"px";
+					document.getElementsByTagName("img")[x].style.borderImage = "url('css/imagenes/marco.png') 50";
+					document.getElementsByTagName("img")[x].draggable = true;
+					document.getElementsByTagName("img")[x].addEventListener("dragstart",drag,false);
+					PositionX+=(150+200);
+					if(x==2)
+					{
+						PositionY+=(200);
+						PositionX = 50;
+					}
+						
+				}
+				
+				reproducirInstrucciones();
+			}
+			
+			//DRAG AND DROP CODE
+				function allowDrop(e) {
+					e.preventDefault();
+				}
+	
+				function drag(e) {
+				 e.dataTransfer.setData("text", e.target.id);
+				}
+				
+				function dropCaja1(e) {	
+					var data = e.dataTransfer.getData("text");
+					e.preventDefault();
+					console.log(data);
+		
+					if ((data == "comun1") || (data == "comun2") || (data == "comun3")){
+						document.getElementById(data).style.visibility = "hidden";
+                        imageActual = document.getElementById("cajaLetrero1");
+						imageActual.style.left = "230px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						sonidoCajaCool();
+					}else{
+						imageActual = document.getElementById("cajaLetrero2");
+						imageActual.style.left = "230px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						sonidoCajaBad();
+					}
+					setTimeout(ocultar,2000) ;
+				}
+				function dropCaja2(e) {	
+					var data = e.dataTransfer.getData("text");
+					e.preventDefault();
+					console.log(data);
+		
+					if ((data == "propio1") || (data == "propio2") || (data == "propio3")){
+						document.getElementById(data).style.visibility = "hidden";
+						imageActual = document.getElementById("cajaLetrero1");
+						imageActual.style.left = "630px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						sonidoCajaCool();
+						
+					}else{
+						
+						document.getElementById(data).style.visibility = "visible";
+						imageActual = document.getElementById("cajaLetrero2");
+						imageActual.style.left = "630px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						sonidoCajaBad();
+					}
+					setTimeout(ocultar,2000) ;
+				}
+				
+				function ocultar(){
+ 
+						imageActual.style.visibility = "hidden";
+				}
+				function sonidoCajaCool()
+				{
+					//audiocool.currentTime = 1;
+					audiocool.play();
+					setTimeout(pararSonido(audiocool),audiobad.duration*1000);
+				}
+				function sonidoCajaBad()
+				{
+					//audiobad.currentTime = 1;
+					audiobad.play();
+					setTimeout(pararSonido(audiobad),audiobad.duration*1000);
+				}
+				function pararSonido(Audio)
+				{
+					Audio.pause();
+				}
+			//DRAG AND DROP END OF THE CODE
+			
+				function reproducirInstrucciones()
+				{
+					actividad.currentTime = 0;
+					actividad.play();
+					mostrarIconoSonido();
+					setTimeout(ocultarIconoSonido,actividad.duration*1000);
+					setTimeout(pararInstrucciones,actividad.duration*1000);
+				}
+				
+				function pararInstrucciones()
+				{
+					actividad.pause();
+				}
+		
+				function ocultarIconoSonido()
+				{
+					document.getElementById('sonidoimagen').src = "css/imagenes/sonido-off.png";
+				}
+				
+				function mostrarIconoSonido()
+				{
+					document.getElementById('sonidoimagen').src = "css/imagenes/sonido.png";
+				}
+			window.onload = ordenarImagenes;
+		</script>
+		<style>
+			/*div:nth-child(1){-webkit-border-image:url(css/imagenes/marco.png) 0 round;border-image-width: 5px; width = 175px; height = 175px;}*/
+			#caja1{position:absolute; left: 200px; bottom:0px;}
+			#caja2{position:absolute; left: 600px; bottom:0px;}
+			#cajaLetrero1{position:absolute; left: 0px; bottom:0px;visibility :hidden; }
+			#cajaLetrero2{position:absolute; left: 0px; bottom:0px;visibility :hidden; }
+			p{position:absolute; left:50px; top:2px; font-size:25px;}
+			#sonidoimagen{position:absolute; left:800px; top:10px;}
+		</style>
+	</head>
+	<body>
+	<div id = "contenedor">
+		<p>Arrastra los sustantivos propios y comunes a la caja correspondiente</p>
+		
+		<img id = "comun1"  src = "css/imagenes/silla.png"     width = "175px" height = "175px"/>
+		<img id = "propio1" src = "css/imagenes/hospital.png"  width = "175px" height = "175px"/>
+		<img  id = "comun2" src = "css/imagenes/persona.png"   width = "175px" height = "175px"/>
+		<img id = "propio2" src = "css/imagenes/iglesia.png"   width = "175px" height = "175px"/>
+		<img id = "comun3"  src = "css/imagenes/animal.png"    width = "175px" height = "175px"/>
+		<img id = "propio3" src = "css/imagenes/loteria.png"   width = "175px" height = "175px"/>
+		
+		<img id = "caja1" src = "css/imagenes/caja_1.png"  width = "250px" height = "175px"  ondrop="dropCaja1(event)" ondragover="allowDrop(event)"/>
+		<img id = "caja2" src = "css/imagenes/caja_2.png"  width = "250px" height = "175px"  ondrop="dropCaja2(event)" ondragover="allowDrop(event)"/>
+		<img id = "cajaLetrero1" src = "css/imagenes/buentrabajo.png" width = "175px" height = "100px"/>
+		<img id = "cajaLetrero2" src = "css/imagenes/dalenuevo.png"   width = "175px" height = "100px"/>
+		<img id = "sonidoimagen" src = "css/imagenes/sonido.png" width = "50px" height = "50px" onclick = "reproducirInstrucciones()"/>
+		<audio id = "audiocool"><source src = "sonidos/buentrabajo.mp3" type = "audio/mpeg"><source src = "sonidos/buentrabajo.ogg" type = "audio/ogg"></audio>
+		<audio id = "audiobad"><source src = "sonidos/vuelveAintentarlo.mp3" type = "audio/mpeg"><source src = "sonidos/vuelveAintentarlo.ogg" type = "audio/ogg"></audio>
+		<audio id = "actividad"><source src = "sonidos/actividad.mp3" type = "audio/mpeg"><source src = "sonidos/actividad.ogg" type = "audio/ogg"></audio>
+		
+	</div>
+	</body>
+</html>

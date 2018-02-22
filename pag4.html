@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html  lang  = "es">
+	<head>
+		<meta charset = "utf-8"/>
+		<link rel = "stylesheet" href = "css/estilo.css"/>
+		<title>poda 1</title>
+		
+		<script>
+			var song = document.getElementById("sonido");
+			var t = 0, ctx;
+			function visibilidad()
+			{//6:50
+				t++;//Cada vez que entra t incrementa y pone visible un p
+				switch(t)
+				{
+					case 1: document.getElementsByTagName("p")[0].style.visibility = "visible";break;
+					case 2:	document.getElementsByTagName("line")[0].style.visibility = "visible";document.getElementsByTagName("p")[1].style.visibility = "visible";break;
+					case 3:	document.getElementsByTagName("line")[1].style.visibility = "visible";document.getElementsByTagName("p")[2].style.visibility = "visible";break;
+					case 4:	document.getElementsByTagName("line")[2].style.visibility = "visible";document.getElementsByTagName("p")[3].style.visibility = "visible";break;
+					case 5:	document.getElementsByTagName("line")[3].style.visibility = "visible";document.getElementsByTagName("p")[4].style.visibility = "visible";break;
+					case 6:	document.getElementsByTagName("line")[4].style.visibility = "visible";document.getElementsByTagName("p")[5].style.visibility = "visible";break;
+					case 7:	document.getElementsByTagName("line")[5].style.visibility = "visible";document.getElementsByTagName("p")[6].style.visibility = "visible";break;
+					case 8:	document.getElementsByTagName("line")[6].style.visibility = "visible";document.getElementsByTagName("p")[7].style.visibility = "visible";break;
+					
+				}
+			}
+			function parar()
+			{
+				sonido.pause();
+				document.getElementById("gota").src = "css/imagenes/gota.png";
+			}
+			function iniciar()
+			{
+				sonido.play();
+				sonido.currentTime = 68;
+				setTimeout(visibilidad,1000);
+				setTimeout(visibilidad,(72000-68000));
+				setTimeout(visibilidad,(73000-68000));
+				setTimeout(visibilidad,(74500-68000));
+				setTimeout(visibilidad,(75500-68000));
+				setTimeout(visibilidad,(77500-68000));
+				setTimeout(visibilidad,(79000-68000));
+				setTimeout(parar,(81500-68000));
+			}
+			window.onload = iniciar;
+		</script>
+		<style>
+			p:nth-child(1){width: 200px; height: 60px;position:fixed; top:0px; left: 420px;border-radius: 5px; background-color: black;font-size:25px;color:white;text-align:center;}
+			p:nth-child(2){width: 153px; height:38px; position: fixed; left:225px; top:160px;font-size:25px;text-align:center;}
+			p:nth-child(3){width: 145px; height:207px; position: fixed; left: 230px; top: 250px; border-style:solid; border-radius:5px;font-size:25px;text-align:center; }
+			p:nth-child(4){width: 153px; height:38px; position: fixed; left:460px; top:160px;font-size:25px;text-align:center;}
+			p:nth-child(5){width: 204px; height:200px; position: fixed; left: 430px; top: 280px; border-style:solid; border-radius:5px;font-size:25px;text-align:center; }
+			p:nth-child(6){width: 153px; height:38px; position: fixed; left:696px; top:160px;font-size:25px;text-align:center;}
+			p:nth-child(7){width: 145px; height:230px; position: fixed; left: 701px; top: 250px; border-style:solid; border-radius:5px;font-size:25px;text-align:center; }
+			
+			
+			p:nth-child(8){width:51px;height:15px;position:fixed; bottom:30px; left: 409px;font-size:25px;color:white;}
+			p:nth-child(9){width:204px;height:15px;position:fixed; bottom:10px; left:409px;font-size:20px;color:white;}
+			#gota{margin-top:400px;margin-left:80px;}
+			#boton{position:fixed; bottom:5px;right:360px;}
+			svg{position:fixed; top: 0%; left:0%;/*border-style:solid;border-color:black;*/}
+		</style>
+	</head>
+	<body>	
+			<p>Sustantivos propios<br>ejemplos</p>
+			<p>persona</p>
+			<p>Manuel<br><img src = "css/imagenes/abuela.png" /></p>
+			<p>lugar</p>
+			<p>parque omar<br><img src = "css/imagenes/parque.png" /></p>
+			<p>animal</p>
+			<p>pasitos<br>caballo<img src = "css/imagenes/caballo.png" /></p>
+			<p>SUTANTIVOS</p>
+			<p>PROPIOS Y  COMUNES</p>
+			<img id = "gota" src = "css/imagenes/gm_anim.gif"/>
+			
+			<svg  height=768px width=1024px>
+				<line x1=50.5% y1=12% x2=29.5% y2=24.5% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(1->2)!-->
+				<line x1=29.5% y1=28% x2=29.5% y2=35% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(2->3)!-->
+				<line x1=50.5% y1=12% x2=52.5% y2=24.5% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(1->4)!-->
+				<line x1=52.5% y1=28% x2=52.5% y2=40% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(4->5)!-->
+				<line x1=50.5% y1=12% x2=75.5% y2=24.5% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(1->6)!-->
+				<line x1=75.5% y1=28% x2=75.5% y2=35% style="stroke:rgb(0,0,0);stroke-width:2" /><!--p(6->7)!-->
+			</svg>
+			<a href = "pag5.html"><img id = "boton" src = "css/imagenes/btn_avanzar.png"/></a>
+		<audio id = "sonido" >
+			<source src = "sonidos/instructor.mp3" type = "audio/mp3"/>
+			<source src = "sonidos/instructor.ogg" type = "audio/ogg"/>
+		</audio>
+		<script>for(var x = 0; x < 13; x++){document.getElementsByTagName("p")[x].style.visibility = "hidden";document.getElementsByTagName("line")[x].style.visibility="hidden";}</script>
+	</body>
+</html>

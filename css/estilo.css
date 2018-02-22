@@ -1,0 +1,5 @@
+body{ background-image: url("imagenes/fondoact.png");
+		background-repeat:no-repeat;
+		max-width: 1024px; max-height: 768px;
+		background-size: 1024px 768px;}
+#contenido{border-style:solid;border-color:black;}

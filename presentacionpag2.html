@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html  lang  = "es">
+	<head>
+		<meta charset = "utf-8"/>
+	
+		<title>poda 1</title>
+		<script>
+			var song = document.getElementById("sondio");
+			function parar()
+			{
+				sonido.pause();
+			}
+			function iniciar()
+			{
+				sonido.play();//Hacer referencia a la misma etiqueta
+				setTimeout(parar,14500);
+			}
+			window.onload = iniciar;
+		</script>
+		<style>
+			body{ background-image: url("css/imagenes/fondo.png");
+		background-repeat:no-repeat;
+		max-width: 1024px; max-height: 768px;
+		background-size: 1024px 768px;}
+		#textoabajo{color:black; text-align:center;font-size:200%;padding-top:40%;}
+	#boton{position:fixed; bottom:5px;right:360px;}
+		
+		</style>
+	</head>
+	<body>
+		<p id = "textoabajo">ACTIVIDAD OI</p>
+		<a href = "actividad.html"><img id = "boton" src = "css/imagenes/btn_avanzar.png"/></a>
+		<!--<audio id = "sonido">
+			<source src = "sonidos/instructor.mp3" type = "audio/mp3"/>
+			<source src = "sonidos/instructor.ogg" type = "audio/ogg"/>
+		</audio>!-->
+	</body>
+</html>

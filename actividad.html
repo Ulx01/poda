@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html  lang  = "es">
+	<head>
+		<meta charset = "utf-8"/>
+		<link rel = "stylesheet" href = "css/estilo.css"/>
+		<title>poda 1</title>
+		<script>
+			var imageActual, nimg = 1, ActivarVuelta = 0;
+			var NombresImg = ["SILLA", "HOSPITAL SANTO TOMAS","ABUELO","IGLESIA CATEDRAL METROPOLITANA DE PANAMA","GUACAMAYA","LOTERIA NACIONAL DE BENEFICIENCIA"
+			,"CAMA","PARQUE OMAR","MESA","PASITOS CABALLO","SOMBRERO","CARMEN"];
+			function ordenarImagenes()
+			{
+				var PositionX = 50, PositionY = 70, ImgTemp, TextoImg;
+				for(var x = 0; x < document.getElementsByTagName("img").length - 5; x++)
+				{
+					ImgTemp = document.getElementsByTagName("img")[x];
+					TextoImg = document.getElementsByTagName("P")[x+1];
+					ImgTemp.style.visibility = "visible";
+					ImgTemp.style.position = "absolute";
+					ImgTemp.style.top = PositionY+"px";
+					ImgTemp.style.left = PositionX+"px";
+					ImgTemp.src = "css/imagenes/Actividad/ejemplo" + nimg + ".png";
+					ImgTemp.style.borderImage = "url('css/imagenes/marco.png') 20";
+					ImgTemp.style.borderWidth = "15px";
+					TextoImg.innerHTML = NombresImg[nimg-1];
+					TextoImg.style.width = "175px";
+					TextoImg.style.textAlign = "center";
+					TextoImg.style.fontSize = "10px";
+					TextoImg.style.color = "black";
+					TextoImg.position = "absolute";
+					TextoImg.style.top = PositionY+180+"px";
+					TextoImg.style.left = PositionX+"px";
+					ImgTemp.draggable = true;
+					ImgTemp.addEventListener("dragstart",drag,false);
+					PositionX+=(150+200);
+					if(x==2)
+					{
+						PositionY+=(230);
+						PositionX = 50;
+					}
+					nimg+=1;
+						
+				}
+				reproducirInstrucciones();
+			}
+			
+			//DRAG AND DROP CODE
+				function allowDrop(e) {
+					e.preventDefault();
+				}
+	
+				function drag(e) {
+				 e.dataTransfer.setData("text", e.target.id);
+				}
+				
+				function dropCaja1(e) {	
+					var data = e.dataTransfer.getData("text");
+					e.preventDefault();
+					//console.log(data);
+		
+					if ((data == "comun1") || (data == "comun2") || (data == "comun3")){
+						ActivarVuelta+=1;
+						document.getElementById(data).style.visibility = "hidden";
+                        imageActual = document.getElementById("cajaLetrero1");
+						imageActual.style.left = "230px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						audiocool.play();
+					}else{
+						imageActual = document.getElementById("cajaLetrero2");
+						imageActual.style.left = "230px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						audiobad.play();
+					}
+					setTimeout(ocultar,1500) ;
+				}
+				function dropCaja2(e) {	
+					var data = e.dataTransfer.getData("text");
+					e.preventDefault();
+					//console.log(data);
+		
+					if ((data == "propio1") || (data == "propio2") || (data == "propio3")){
+						ActivarVuelta+=1;
+						document.getElementById(data).style.visibility = "hidden";
+						imageActual = document.getElementById("cajaLetrero1");
+						imageActual.style.left = "630px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						audiocool.play();
+						
+					}else{
+						
+						document.getElementById(data).style.visibility = "visible";
+						imageActual = document.getElementById("cajaLetrero2");
+						imageActual.style.left = "630px";
+						imageActual.style.bottom = "150px";
+						imageActual.style.visibility = "visible";
+						audiobad.play();
+					}
+					setTimeout(ocultar,1500) ;
+				}
+				
+				function ocultar(){
+ 
+						imageActual.style.visibility = "hidden";
+						if(ActivarVuelta == 6)
+							ordenarImagenes();
+						if(ActivarVuelta == 12)
+							window.location="http://..index.html";
+				}
+				
+			//DRAG AND DROP END OF THE CODE
+			
+				function reproducirInstrucciones()
+				{
+					actividad.currentTime = 0;
+					actividad.play();
+					mostrarIconoSonido();
+					setTimeout(ocultarIconoSonido,actividad.duration*1000);
+					setTimeout(pararInstrucciones,actividad.duration*1000);
+				}
+				
+				function pararInstrucciones()
+				{
+					actividad.pause();
+				}
+		
+				function ocultarIconoSonido()
+				{
+					document.getElementById('sonidoimagen').src = "css/imagenes/sonido-off.png";
+				}
+				
+				function mostrarIconoSonido()
+				{
+					document.getElementById('sonidoimagen').src = "css/imagenes/sonido.png";
+				}
+			window.onload = ordenarImagenes;
+		</script>
+		<style>
+			/*div:nth-child(1){-webkit-border-image:url(css/imagenes/marco.png) 0 round;border-image-width: 5px; width = 175px; height = 175px;}*/
+			#caja1{position:absolute; left: 200px; bottom:0px;}
+			#caja2{position:absolute; left: 600px; bottom:0px;}
+			#cajaLetrero1{position:absolute; left: 0px; bottom:0px;visibility :hidden; }
+			#cajaLetrero2{position:absolute; left: 0px; bottom:0px;visibility :hidden; }
+			p{position:absolute; left:50px; top:2px; font-size:25px;}
+			#sonidoimagen{position:absolute; left:800px; top:10px;}
+		</style>
+	</head>
+	<body>
+	<div id = "contenedor">
+		<p>Arrastra los sustantivos propios y comunes a la caja correspondiente</p>
+		
+		<img id = "comun1"    width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		<img id = "propio1"   width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		<img  id = "comun2"   width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		<img id = "propio2"   width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		<img id = "comun3"    width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		<img id = "propio3"   width = "175px" height = "175px"  visibility = "hidden"/><p></p>
+		
+		<img id = "caja1" src = "css/imagenes/caja_1.png"  width = "250px" height = "175px"  ondrop="dropCaja1(event)" ondragover="allowDrop(event)"/>
+		<img id = "caja2" src = "css/imagenes/caja_2.png"  width = "250px" height = "175px"  ondrop="dropCaja2(event)" ondragover="allowDrop(event)"/>
+		<img id = "cajaLetrero1" src = "css/imagenes/buentrabajo.png" width = "175px" height = "100px"/>
+		<img id = "cajaLetrero2" src = "css/imagenes/dalenuevo.png"   width = "175px" height = "100px"/>
+		<img id = "sonidoimagen" src = "css/imagenes/sonido.png" width = "50px" height = "50px" onclick = "reproducirInstrucciones()"/>
+		<audio id = "audiocool"><source src = "sonidos/buentrabajo.mp3" type = "audio/mpeg"><source src = "sonidos/buentrabajo.ogg" type = "audio/ogg"></audio>
+		<audio id = "audiobad"><source src = "sonidos/vuelveAintentarlo.mp3" type = "audio/mpeg"><source src = "sonidos/vuelveAintentarlo.ogg" type = "audio/ogg"></audio>
+		<audio id = "actividad"><source src = "sonidos/actividad.mp3" type = "audio/mpeg"><source src = "sonidos/actividad.ogg" type = "audio/ogg"></audio>
+		
+	</div>
+	</body>
+</html>
